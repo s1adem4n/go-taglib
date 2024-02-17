@@ -25,7 +25,7 @@ On MacOS, you may install this with
 # Basic example
 ```go
 import (
-  "github.com/s1adem4n/go-taglib"
+  taglib "github.com/s1adem4n/go-taglib"
   "fmt"
 )
 
