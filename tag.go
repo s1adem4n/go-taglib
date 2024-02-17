@@ -125,14 +125,19 @@ func (file *File) SetYear(year uint) {
 
 // Support for non-standard tags
 
+// This does the same as file.GetTag("ALBUMARTIST")
+// taglib doesn't have a native way of doing this since it only supports the standard tags
 func (file *File) AlbumArtist() string {
 	return file.GetTag("ALBUMARTIST")
 }
 
+// This does the same as file.SetTag("ALBUMARTIST", ...)
+// taglib doesn't have a native way of doing this since it only supports the standard tags
 func (file *File) SetAlbumArtist(albumArtist string) {
 	file.SetTag("ALBUMARTIST", albumArtist)
 }
 
+// Used to get non-standard tags
 func (file *File) GetTag(name string) string {
 	cs := C.CString(name)
 	defer C.free(unsafe.Pointer(cs))
@@ -145,6 +150,7 @@ func (file *File) GetTag(name string) string {
 	return ""
 }
 
+// Used to set non-standard tags
 func (file *File) SetTag(name, value string) {
 	csName := C.CString(name)
 	defer C.free(unsafe.Pointer(csName))
@@ -155,6 +161,7 @@ func (file *File) SetTag(name, value string) {
 
 // Pictures
 
+// Picture is directly taken from TagLibs' Complex_Property_Picture_Data struct
 type Picture struct {
 	MimeType    string
 	PictureType string
@@ -163,6 +170,8 @@ type Picture struct {
 	Size        uint
 }
 
+// Gets the first picture from the file
+// TODO: support multiple pictures
 func (file *File) Picture() (*Picture, error) {
 	cs := C.CString("PICTURE")
 	defer C.free(unsafe.Pointer(cs))
@@ -184,6 +193,8 @@ func (file *File) Picture() (*Picture, error) {
 	}, nil
 }
 
+// Sets the first picture in the file
+// This removes all other pictures, if any
 func (file *File) SetPicture(picture *Picture) error {
 	csData := C.CBytes(picture.Data)
 	defer C.free(csData)
@@ -199,6 +210,7 @@ func (file *File) SetPicture(picture *Picture) error {
 }
 
 // Audio properties
+
 func (file *File) Bitrate() uint {
 	return uint(C.taglib_audioproperties_bitrate(file.props))
 }
