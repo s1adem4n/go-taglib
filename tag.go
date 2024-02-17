@@ -13,12 +13,6 @@ void taglib_complex_property_set_picture(TagLib_File *file, char *data, unsigned
   TAGLIB_COMPLEX_PROPERTY_PICTURE(props, data, size, desc, mime, typ);
   taglib_complex_property_set(file, "PICTURE", props);
 }
-
-void set_album_artist(TagLib_File *file, const char *album_artist) {
-    TagLib_Tag *tag = taglib_file_tag(file);
-    taglib_tag_set_artist(tag, album_artist);
-    taglib_file_save(file);
-}
 */
 import "C"
 import (
@@ -125,7 +119,7 @@ func (file *File) SetYear(year uint) {
 
 // Support for non-standard tags
 
-// This does the same as file.GetTag("ALBUMARTIST")
+// This does the same as file.GetTag("ALBUMARTIST").
 // taglib doesn't have a native way of doing this since it only supports the standard tags
 func (file *File) AlbumArtist() string {
 	return file.GetTag("ALBUMARTIST")
