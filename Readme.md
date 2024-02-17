@@ -1,6 +1,7 @@
 # go-taglib
 
 A taglib wrapper for Go
+
 Special thanks [wtolson](https://github.com/wtolson) for writing the original [go-taglib](https://github.com/wtolson/go-taglib).
 I've used his code as a start and extended it with:
 - non-standard tag getting and setting
@@ -8,6 +9,9 @@ I've used his code as a start and extended it with:
 - functions for getting and setting pictures
 
 Also, wtolson's code used a global mutex for every operation, but I removed it, because (from my testing) I couldn't find any issues while running this concurrently.
+
+# Documentation
+Check the documentation at [pkg.go.dev/github.com/s1adem4n/go-taglib](https://pkg.go.dev/github.com/s1adem4n/go-taglib)
 
 
 # Dependencies
