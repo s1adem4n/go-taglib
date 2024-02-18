@@ -170,7 +170,7 @@ func (file *File) Picture() (*Picture, error) {
 	cs := C.CString("PICTURE")
 	defer C.free(unsafe.Pointer(cs))
 	property := C.taglib_complex_property_get(file.fp, cs)
-	if *property == nil {
+	if property == nil || *property == nil {
 		return nil, ErrNoPicture
 	}
 	defer C.taglib_complex_property_free(property)
