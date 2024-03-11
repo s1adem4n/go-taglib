@@ -23,6 +23,8 @@ import (
 
 func init() {
 	C.taglib_set_string_management_enabled(0)
+	// use UTF-8 as default text encoding
+	C.taglib_id3v2_set_default_text_encoding(3)
 }
 
 var (
